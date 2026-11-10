@@ -1,1 +1,274 @@
+/* ---------- Variables ---------- */
+:root {
+  --fondo: #eef1f5;
+  --superficie: #ffffff;
+  --texto: #1c2733;
+  --texto-suave: #5b6876;
+  --borde: #d5dbe3;
 
+  --azul: #2f5d8a;
+  --verde: #3b8f5a;
+  --ambar: #c98100;
+  --rojo: #c0392b;
+
+  --radio: 10px;
+  --fuente: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 24px 16px;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 2px;
+}
+
+/* ---------- Encabezado ---------- */
+.encabezado h1 {
+  margin: 0;
+  font-size: 1.9rem;
+}
+
+.fecha {
+  margin: 0 0 16px;
+  color: var(--texto-suave);
+  text-transform: capitalize;
+}
+
+.progreso {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progreso progress {
+  flex: 1;
+  height: 10px;
+  accent-color: var(--verde);
+}
+
+#texto-progreso {
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+/* ---------- Avisos ---------- */
+.avisos {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.aviso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fdecea;
+  border: 1px solid var(--rojo);
+  border-left-width: 6px;
+  border-radius: var(--radio);
+  color: #7a1f15;
+  font-weight: 600;
+}
+
+.aviso button {
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid var(--rojo);
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ---------- Formulario ---------- */
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.campo-nombre {
+  flex: 1 1 220px;
+}
+
+.campo-duracion {
+  width: 130px;
+}
+
+.campo input {
+  padding: 9px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  color: var(--texto);
+}
+
+.mensaje-formulario {
+  min-height: 1.4em;
+  margin: 8px 4px 0;
+  font-size: 0.9rem;
+  color: var(--rojo);
+}
+
+/* ---------- Botones ---------- */
+.boton {
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.boton-principal {
+  background: var(--azul);
+  color: #ffffff;
+}
+
+.boton-secundario {
+  background: var(--superficie);
+  border-color: var(--borde);
+  color: var(--texto);
+}
+
+.boton-peligro {
+  background: transparent;
+  border-color: var(--borde);
+  color: var(--rojo);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- Lista de tareas ---------- */
+.lista-tareas {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tarea {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 4px 14px;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-left: 6px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.tarea input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--verde);
+  cursor: pointer;
+}
+
+.tarea-nombre {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.tarea-detalle {
+  grid-column: 2;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.tarea-acciones {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  display: flex;
+  gap: 8px;
+}
+
+.tarea-tiempo {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* Estados de la tarea */
+.tarea.en-curso   { border-left-color: var(--azul); }
+.tarea.pausada    { border-left-color: var(--ambar); }
+.tarea.vencida    { border-left-color: var(--rojo); background: #fff6f5; }
+.tarea.completada { border-left-color: var(--verde); }
+
+.tarea.poco-tiempo .tarea-tiempo,
+.tarea.vencida .tarea-tiempo {
+  color: var(--rojo);
+}
+
+.tarea.completada .tarea-nombre {
+  text-decoration: line-through;
+  color: var(--texto-suave);
+}
+
+.lista-vacia {
+  padding: 24px;
+  text-align: center;
+  color: var(--texto-suave);
+  background: var(--superficie);
+  border: 1px dashed var(--borde);
+  border-radius: var(--radio);
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 520px) {
+  .tarea {
+    grid-template-columns: auto 1fr;
+  }
+
+  .tarea-acciones {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    justify-content: flex-end;
+  }
+}
